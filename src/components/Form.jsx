@@ -1,61 +1,65 @@
-import React, { useState } from 'react';
-import styles from './Form.module.css'
+import React from 'react';
+import styles from './Form.module.css';
 
-const Form = () => {
-    const [firstName, setFirstName]= useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPass, setConfirmPass] = useState('');
+const Form = props => {
+    const {input, setInput} = props;
+    const {firstName, lastName, email, password, confirmPass} = props.input;
+    
+    const info= e => {
+        setInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
+    };
 
     return (
-        <>
-            <form>
-                <div className={styles.box}>
-                    <label>First Name</label>
-                    <input type='text' onChange={e => setFirstName(e.target.value)}/>
-                </div>
-                <div className={styles.box}>
-                    <label>Last Name</label>
-                    <input type='text' onChange={e => setLastName(e.target.value)}/>
-                </div>
-                <div className={styles.box}>
-                    <label>Email</label>
-                    <input type='email' onChange={e => setEmail(e.target.value)}/>
-                </div>
-                <div className={styles.box}>
-                    <label>Password</label>
-                    <input type='password' onChange={e => setPassword(e.target.value)}/>
-                </div>
-                <div className={styles.box}>
-                    <label>Confirm Password</label>
-                    <input type='password' onChange={e => setConfirmPass(e.target.value)}/>
-                </div>
-            </form>
-            <div className={styles.data}>
-                <h3>Your Form Data</h3>
-                <section>
-                    <p>First Name:</p>
-                    <span>{firstName}</span>
-                </section>
-                <section>
-                    <p>Last Name:</p>
-                    <span>{lastName}</span>
-                </section>
-                <section>
-                    <p>Email:</p>
-                    <span>{email}</span>
-                </section>
-                <section>
-                    <p>Password:</p>
-                    <span>{password}</span>
-                </section>
-                <section>
-                    <p>Confirm Password:</p>
-                    <span>{confirmPass}</span>
-                </section>
+        <form>
+            <div className={styles.box}>
+                <label htmlFor='firstName'>First Name</label>
+                <input type='text' name='firstName' onChange={info}/>
             </div>
-        </>
+            {
+                firstName.length > 0 && firstName.length < 2 ?
+                <h4>First Name must be at least 2 characters.</h4> :
+                ''
+            }
+            <div className={styles.box}>
+                <label htmlFor='lastName'>Last Name</label>
+                <input type='text' name='lastName' onChange={info}/>
+            </div>
+            {
+                lastName.length > 0 && lastName.length < 2 ?
+                <h4>Last Name must be at least 2 characters.</h4> :
+                ''
+            }
+            <div className={styles.box}>
+                <label htmlFor='email'>Email</label>
+                <input type='email' name='email' onChange={info}/>
+            </div>
+            {
+                email.length > 0 && email.length < 5 ?
+                <h4>Email must be at least 5 characters.</h4> :
+                ''
+            }
+            <div className={styles.box}>
+                <label htmlFor='password'>Password</label>
+                <input type='password' name='password' onChange={info}/>
+            </div>
+            {
+                password.length > 0 && password.length < 8 ?
+                <h4>Password must be at least 8 characters.</h4> :
+                ''
+            }
+            <div className={styles.box}>
+                <label htmlFor='confirmPass'>Confirm Password</label>
+                <input type='password' name='confirmPass' onChange={info}/>
+            </div>
+            {
+                password === confirmPass && confirmPass.length > -1  ?
+                '' :
+                <h4>Passwords must match</h4>
+            }
+        </form>
     );
 }
 

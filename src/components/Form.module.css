@@ -21,14 +21,3 @@ input{
     border-radius: 5px;
     margin-top: 3px;
 }
-
-.data section{
-    display: flex;
-    align-items: center;
-    margin: 0 20px;
-}
-
-.data p{
-    width: 80px;
-    margin-right: 20px;
-}

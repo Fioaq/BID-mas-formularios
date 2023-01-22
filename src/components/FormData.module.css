@@ -1,0 +1,13 @@
+.data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.data section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+}
